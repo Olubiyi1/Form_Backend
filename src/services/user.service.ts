@@ -4,6 +4,7 @@ import { comparePassword,hashPassword } from "../middleware/guard";
 // import mongoose from "mongoose";
 
 export const createUser = async (userData: IUser)=>{
+    
     try{
         const existingUser = await userModel.findOne({ email : userData.email});
         if (existingUser){
@@ -21,12 +22,14 @@ export const createUser = async (userData: IUser)=>{
         return { error: "failed to register new user",data: null}
     }
 }
+
+
  export const signIn = async(email:string, password: string)=>{
     try{
         // find the user by email
         const user = await userModel.findOne({email});
 
-        // if no user fond with that email
+        // if no user found with that email
         if(!user){
             return {error :"invalid email or password", data: null}
         }
@@ -37,6 +40,8 @@ export const createUser = async (userData: IUser)=>{
         if(!isPasswordValid){
             return { error : "invalid email or password", data: null}
         }
+
+        return {error: null, data: user};
     }
     catch (error:any){
         return { error : "invalid login details", data:null}
