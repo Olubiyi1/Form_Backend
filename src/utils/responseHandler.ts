@@ -5,13 +5,14 @@ class ResponseHandler {
         res:Response,
         data:any,
         message = "Operation successful",
-        statusCode= 200
+        statusCode= 200,
 
     ): void{
         res.status(statusCode).json({
             status: "success",
             message,
-            data
+            data,
+
         })
 
     }

@@ -2,6 +2,8 @@
 import userModel,{IUser} from "../models/userSchema.model";
 import { comparePassword,hashPassword } from "../middleware/guard";
 // import mongoose from "mongoose";
+import jwt from "jsonwebtoken"
+import config from "../config/config";
 
 export const createUser = async (userData: IUser)=>{
     
@@ -40,8 +42,15 @@ export const createUser = async (userData: IUser)=>{
         if(!isPasswordValid){
             return { error : "invalid email or password", data: null}
         }
+        // create JWT
+        const token = jwt.sign(
+            { data: user._id},
+             config.Secret,
+            {expiresIn: '1d'}  
+        );
 
-        return {error: null, data: user};
+
+        return {error: null, token, data: user};
     }
     catch (error:any){
         return { error : "invalid login details", data:null}
