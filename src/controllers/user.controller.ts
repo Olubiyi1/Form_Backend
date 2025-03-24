@@ -30,3 +30,4 @@ export const loginUser = async(req:Request, res:Response)=>{
         return ResponseHandler.validationError(res,null,error.message)   
     }
 } 
+

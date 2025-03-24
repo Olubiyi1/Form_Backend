@@ -1,9 +1,10 @@
 import express from "express"
 import connectDb from "./config/Db";
 import userRoute from "./routes/userRoute.routes";
-// import cors from "cors"
+import cors from "cors"
 
 const app = express()
+app.use(cors())
 
 // allowing express access json files
 app.use(express.json())

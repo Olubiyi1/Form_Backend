@@ -26,7 +26,7 @@ export const createUser = async (userData: IUser)=>{
 }
 
 
- export const signIn = async(email:string, password: string)=>{
+export const signIn = async(email:string, password: string)=>{
     try{
         // find the user by email
         const user = await userModel.findOne({email});
@@ -42,17 +42,30 @@ export const createUser = async (userData: IUser)=>{
         if(!isPasswordValid){
             return { error : "invalid email or password", data: null}
         }
+        
         // create JWT
-        const token = jwt.sign(
-            { data: user._id},
+       const token = jwt.sign(
+            { id: user._id,
+                email:user.email
+            },
              config.Secret,
-            {expiresIn: '1d'}  
+            {expiresIn: '1d'}
         );
-
-
-        return {error: null, token, data: user};
-    }
+        
+        return {error: null, data: token};
+    } 
     catch (error:any){
         return { error : "invalid login details", data:null}
     }
- }
+}
+// export const logoutUser = async(email:string, password:string)=>{
+
+//     try{
+//         // const {email,password}= req.body;
+
+
+//     }
+//     catch(error){
+//         return{error:"please try again", data:null}
+//     }
+// }

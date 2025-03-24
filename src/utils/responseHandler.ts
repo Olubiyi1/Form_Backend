@@ -12,7 +12,6 @@ class ResponseHandler {
             status: "success",
             message,
             data,
-
         })
 
     }
