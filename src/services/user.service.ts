@@ -8,6 +8,7 @@ import config from "../config/config";
 export const createUser = async (userData: IUser)=>{
     
     try{
+        // checking if email already exist before registering
         const existingUser = await userModel.findOne({ email : userData.email});
         if (existingUser){
             return {error:"Email already Exists", data: null}
