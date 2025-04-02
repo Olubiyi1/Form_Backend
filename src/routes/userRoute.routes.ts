@@ -1,16 +1,15 @@
 import express from "express"
 import { registerUser, loginUser } from "../controllers/user.controller"
-import userValidationSchema from "../models/userValidationSchema"
+import {registerUserValidationSchema, loginValidationSchema} from "../models/userValidationSchema"
 import {validateRequest} from "../middleware/userValidationMiddleware"
 
-const userRoute = express.Router()
+const router = express.Router()
 
-userRoute.get("/",(req,res)=>{
+router.get("/",(req,res)=>{
     res.send("up and running")
 })
 
-userRoute.post("/register",validateRequest(userValidationSchema),registerUser)
-userRoute.post("/login",loginUser)
+router.post("/register", validateRequest(registerUserValidationSchema), registerUser);
+router.post("/login", validateRequest(loginValidationSchema), loginUser);
 
-
-export default userRoute;
+export default router;

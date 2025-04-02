@@ -1,9 +1,10 @@
 
 import userModel,{IUser} from "../models/userSchema.model";
-import { comparePassword,hashPassword } from "../middleware/guard";
+import { comparePassword,createJwt,hashPassword } from "../middleware/guard";
 // import mongoose from "mongoose";
-import jwt from "jsonwebtoken"
-import config from "../config/config";
+// import jwt from "jsonwebtoken"
+// import config from "../config/config";
+
 
 export const createUser = async (userData: IUser)=>{
     
@@ -45,18 +46,15 @@ export const signIn = async(email:string, password: string)=>{
         }
         
         // create JWT
-       const token = jwt.sign(
-            { id: user._id,
-                email:user.email
-            },
-             config.Secret,
-            {expiresIn: '1d'}
-        );
-        
-        return {error: null, data: token};
-    } 
-    catch (error:any){
-        return { error : "invalid login details", data:null}
+        const token =createJwt(
+            {
+                id: user._id,
+                    email:user.email
+            }
+        )
+        return token;
+    }catch (error:any){
+        return {error: error.message}
     }
 }
 // export const logoutUser = async(email:string, password:string)=>{
@@ -69,4 +67,3 @@ export const signIn = async(email:string, password: string)=>{
 //     catch(error){
 //         return{error:"please try again", data:null}
 //     }
-// }

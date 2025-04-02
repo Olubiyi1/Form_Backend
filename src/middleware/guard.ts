@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import config from "../config/config";
+
 
 
 // hash password during login
@@ -13,3 +15,14 @@ export const comparePassword = (password: string,hash: string)=>{
 }
 
 // JWT secret
+export const createJwt= (user:any)=>{
+    const token = jwt.sign(
+        { id: user._id,
+            email:user.email
+        },
+         config.Secret,
+        {expiresIn: '1d'}
+    );
+    return token;
+} ;
+

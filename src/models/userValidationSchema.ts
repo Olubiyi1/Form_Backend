@@ -1,10 +1,11 @@
 import Joi from "joi";
 
-const userValidationSchema = Joi.object({
+
+export const registerUserValidationSchema:Joi.ObjectSchema<any> = Joi.object({
   firstname: Joi.string()
     .trim()
-    .min(1)
-    .max(70)
+    .min(2)
+    .max(50)
     .required()
     .messages({
       'any.required': 'Please enter firstname',
@@ -15,8 +16,8 @@ const userValidationSchema = Joi.object({
   
   lastname: Joi.string()
     .trim()
-    .min(1)
-    .max(70)
+    .min(2)
+    .max(50)
     .required()
     .messages({
       'any.required': 'Please enter lastname', 
@@ -65,4 +66,23 @@ const userValidationSchema = Joi.object({
     })
 });
 
-export default userValidationSchema;
+
+export const loginValidationSchema = Joi.object({
+
+  email: Joi.string()
+    .email()
+    .trim()
+    .required()
+    .messages({
+      'string.email': 'Invalid email format',
+      'string.empty': 'Email cannot be empty'
+    }),
+
+  password: Joi.string()
+    .trim()
+    .required()
+    .messages({
+      'any.required': 'Please enter a password',
+      'string.empty': 'Password cannot be empty'
+    })
+})

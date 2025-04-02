@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import ResponseHandler from '../utils/responseHandler';
 import Joi from 'joi';
 
 export const validateRequest = (schema: Joi.ObjectSchema) => {
@@ -14,7 +13,6 @@ export const validateRequest = (schema: Joi.ObjectSchema) => {
         errors: errorMessages
       });
     }
-    
     next();
   };
 };
