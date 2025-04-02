@@ -1,9 +1,7 @@
 
 import userModel,{IUser} from "../models/userSchema.model";
 import { comparePassword,createJwt,hashPassword } from "../middleware/guard";
-// import mongoose from "mongoose";
-// import jwt from "jsonwebtoken"
-// import config from "../config/config";
+
 
 
 export const createUser = async (userData: IUser)=>{
@@ -52,7 +50,7 @@ export const signIn = async(email:string, password: string)=>{
                     email:user.email
             }
         )
-        return token;
+        return {error:null, data:token};
     }catch (error:any){
         return {error: error.message}
     }
