@@ -1,4 +1,3 @@
-
 import userModel,{IUser} from "../models/userSchema.model";
 import { comparePassword,createJwt,hashPassword } from "../middleware/guard";
 

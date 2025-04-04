@@ -13,8 +13,6 @@ app.use(cors({
 // allowing express access json files
 app.use(express.json())
 
-
-
 // Db connection
 connectDb();
 
