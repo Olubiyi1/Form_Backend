@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import {createUser,signIn} from "../services/user.service" 
 import ResponseHandler from "../utils/responseHandler";   
 
+
 export const registerUser = async(req:Request, res:Response)=>{     
 try{        
      const {error,data} = await createUser(req.body)         
