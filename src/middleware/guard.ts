@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken"
 import config from "../config/config";
 
 
-
 // hash password during login
 export const hashPassword = (password: string)=>{
     return bcrypt.hash(password,10)

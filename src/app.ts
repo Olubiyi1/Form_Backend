@@ -1,5 +1,5 @@
 import express from "express"
-import connectDb from "./config/Db";
+import connectDb from "./config/Db"
 import userRoute from "./routes/userRoute.routes";
 import cors from "cors"
 import errorHandler from "./middleware/errorHandlers";
@@ -10,7 +10,6 @@ app.use(cors({
     methods:["GET","PUT","POST","DELETE"],
     allowedHeaders:["content-type","Authorization"]
 }))
-
 // allowing express access json files
 app.use(express.json())
 
